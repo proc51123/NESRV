@@ -1,6 +1,6 @@
 # NESRV — A Custom RISC-V Processor
 
-**NESRV** is a RISC-V processor designed and developed by three friends — **N**, **E**, and **S** — as part of an academic and exploratory initiative into open-source hardware. The project is built with modular RTL in SystemVerilog, simulated using Verilator, and prepared for physical design using OpenLane.
+**NESRV** is a RISC-V processor designed and developed as part of an academic and exploratory initiative into open-source hardware. The project is built with modular RTL in SystemVerilog, simulated using Verilator, and prepared for physical design using OpenLane.
 
 ---
 
@@ -64,7 +64,7 @@ cd pd/scripts/
 
 ## 👨‍💻 Team NES
 
-- N — Nitu Kumari Mahato (@nitumahato2003)
+- N — Nitu Kumari Mahato (@NituMahato2003)
 - E — Ekta Singh (@ekta568)
 - S — Subham Pal (@Subhampal9)
 
