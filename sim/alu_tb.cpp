@@ -5,20 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include <bitset>
-
-// Internal ALU opcodes (match definitions.sv)
-enum ALU_OP : uint8_t {
-    ALU_ADD  = 0b0000,
-    ALU_SUB  = 0b0001,
-    ALU_SLL  = 0b0010,
-    ALU_SLT  = 0b0011,
-    ALU_SLTU = 0b0100,
-    ALU_XOR  = 0b0101,
-    ALU_SRL  = 0b0110,
-    ALU_SRA  = 0b0111,
-    ALU_OR   = 0b1000,
-    ALU_AND  = 0b1001
-};
+#include "definitions.h"
 
 void run_test(Valu* alu, uint8_t op, uint32_t a, uint32_t b, const std::string& label) {
     alu->alu_op_i = op;
