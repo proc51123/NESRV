@@ -13,7 +13,9 @@ module alu #(
     input  logic [XLEN-1:0]          operand_b_i,    // Second operand (from rs2 or immediate)
 
     output logic [XLEN-1:0]          alu_result_o,   // Result of ALU operation
-    output logic                     zero_flag_o     // High if result is zero (for branch comparison)
+    output logic                     zero_flag_o, // High if result is zero (for branch comparison)
+	output logic                     sign_flag_o,   // The sign bit (MSB) of the result
+    output logic                     unsigned_less_than_o // High if operand_a < operand_b (unsigned)
 );
 
     // Combinational logic for all ALU operations
@@ -34,7 +36,18 @@ module alu #(
         endcase
     end
    
+    // --- Status Flag Assignments ---
+
     // The zero flag is asserted if the result of the operation is exactly zero.
-    // This is used by branch instructions like BEQ and BNE.
     assign zero_flag_o = (alu_result_o == 32'b0);
+
+    // The sign flag is simply the most significant bit of the result.
+    assign sign_flag_o = alu_result_o[31];
+
+    // This flag is needed for BLTU/BGEU. It performs a direct unsigned comparison.
+    // Note: This is independent of the main ALU result for most operations.
+    // For a SUB, this would be equivalent to the borrow bit.
+    assign unsigned_less_than_o = (operand_a_i < operand_b_i);
+
 endmodule
+
