@@ -8,8 +8,8 @@ module reg_file (
 
     // Write Port (from Write Back stage)
     input  logic        reg_write_en_i, // Write enable signal
-    input  logic [4:0]  rd_addr_i,      // Address of the register to write
-    input  logic [31:0] rd_data_i,      // Data to write into the register
+    input  logic [4:0]  rd_addr_i,      // Address of WriteBack
+    input  logic [31:0] rd_data_i,      // Data from WB
 
     // Read Port 1 (for rs1)
     input  logic [4:0]  rs1_addr_i,     // Address of the first register to read

@@ -2,7 +2,7 @@
 // A simple combinational-read instruction memory for the RISC-V processor.
 
 module instr_mem (
-    input  logic [31:0] address_i,
+    input  logic [31:0] pc_o,
     output logic [31:0] instruction_o
 );
 
@@ -21,6 +21,6 @@ module instr_mem (
     // Combinational read logic.
     // The address from the PC is a byte address. We convert it to a word address
     // by taking the upper 30 bits (effectively dividing by 4).
-    assign instruction_o = memory[address_i[31:2]];
+    assign instruction_o = memory[pc_o[31:2]];
 
 endmodule

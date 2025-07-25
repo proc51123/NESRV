@@ -14,8 +14,8 @@ module if_id_register (
     input  logic        if_id_flush_i,   // When high, register is cleared to a NOP
 
     // Data inputs from IF stage & Instruction Memory
-    input  logic [31:0] if_pc_i,         // PC of the fetched instruction
-    input  logic [31:0] if_instr_i,      // The 32-bit instruction word from memory
+    input  logic [31:0] pc_o,         // PC of the fetched instruction
+    input  logic [31:0] instruction_o,      // The 32-bit instruction word from memory
 
     // Data outputs to ID stage
     output logic [31:0] id_pc_o,
@@ -35,8 +35,8 @@ module if_id_register (
         end else if (!if_id_stall_i) begin
             // If not stalled or flushed, pass the inputs through to the outputs.
             // This is the normal pipeline operation.
-            id_pc_o    <= if_pc_i;
-            id_instr_o <= if_instr_i;
+            id_pc_o    <= pc_o;
+            id_instr_o <= instruction_o;
         end
         // If if_id_stall_i is high, the register holds its previous value,
         // effectively stalling the instruction in this stage.
