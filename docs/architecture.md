@@ -1,1 +1,1 @@
-![Test Image 1](arch.jpeg)
+![Test Image 1](arch.jpg)
