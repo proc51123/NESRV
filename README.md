@@ -62,12 +62,6 @@ cd pd/scripts/
 ./run_openlane.sh
 ```
 
-## 👨‍💻 Team NES
-
-- N — Nitu Kumari Mahato (@NituMahato2003)
-- E — Ekta Singh (@ekta568)
-- S — Subham Pal (@Subhampal9)
-
 ## 📘 Documentation
 
 Detailed architecture documentation is available in:
