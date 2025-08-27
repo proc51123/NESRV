@@ -77,17 +77,17 @@
 ### General structure
 |31              25|24     20|19     15|14     12|11             7|6      0|
 |------------------|---------|---------|---------|----------------|--------|
-|imm[12],imm[10,5] |   rs2   |   rs1   |  func3  |imm[4,1],imm[11]| opcode |
+|imm[12],imm[10:5] |   rs2   |   rs1   |  func3  |imm[4:1],imm[11]| opcode |
 
 ### Instructions
 | instruction |31              25|24     20|19     15|14     12|11             7|6       0|
 |-------------|------------------|---------|---------|---------|----------------|---------|
-|    beq      |imm[12],imm[10,5] |   rs2   |   rs1   |   000   |imm[4,1],imm[11]| 1100011 |
-|    bne      |imm[12],imm[10,5] |   rs2   |   rs1   |   001   |imm[4,1],imm[11]| 1100011 |
-|    blt      |imm[12],imm[10,5] |   rs2   |   rs1   |   100   |imm[4,1],imm[11]| 1100011 |
-|    bge      |imm[12],imm[10,5] |   rs2   |   rs1   |   101   |imm[4,1],imm[11]| 1100011 |
-|    bltu     |imm[12],imm[10,5] |   rs2   |   rs1   |   110   |imm[4,1],imm[11]| 1100011 |
-|    blgu     |imm[12],imm[10,5] |   rs2   |   rs1   |   111   |imm[4,1],imm[11]| 1100011 |
+|    beq      |imm[12],imm[10:5] |   rs2   |   rs1   |   000   |imm[4:1],imm[11]| 1100011 |
+|    bne      |imm[12],imm[10:5] |   rs2   |   rs1   |   001   |imm[4:1],imm[11]| 1100011 |
+|    blt      |imm[12],imm[10:5] |   rs2   |   rs1   |   100   |imm[4:1],imm[11]| 1100011 |
+|    bge      |imm[12],imm[10:5] |   rs2   |   rs1   |   101   |imm[4:1],imm[11]| 1100011 |
+|    bltu     |imm[12],imm[10:5] |   rs2   |   rs1   |   110   |imm[4:1],imm[11]| 1100011 |
+|    blgu     |imm[12],imm[10:5] |   rs2   |   rs1   |   111   |imm[4:1],imm[11]| 1100011 |
 
 ## U-type instructions
 ### General structure
