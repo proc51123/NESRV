@@ -47,9 +47,9 @@ module control_unit (
                         `FUNCT3_MULHSU: begin alu_op_o = `ALU_MULSHU; is_muldiv_o = 2'b01; end
                         `FUNCT3_MULHU: begin alu_op_o = `ALU_MULHU; is_muldiv_o = 2'b01; end
                         `FUNCT3_DIV:  begin alu_op_o = `ALU_DIV;  is_muldiv_o = 2'b10; end
-                        `FUNCT3_DIVU: begin alu_op_o = `ALU_DIV;  is_muldiv_o = 2'b10; end
+                        `FUNCT3_DIVU: begin alu_op_o = `ALU_DIVU;  is_muldiv_o = 2'b10; end
                         `FUNCT3_REM:  begin alu_op_o = `ALU_REM;  is_muldiv_o = 2'b10; end
-                        `FUNCT3_REMU: begin alu_op_o = `ALU_REM;  is_muldiv_o = 2'b10; end
+                        `FUNCT3_REMU: begin alu_op_o = `ALU_REMU;  is_muldiv_o = 2'b10; end
                         default: begin alu_op_o = `ALU_ADD; is_muldiv_o = 2'b00; end
                     endcase
                 end else begin
@@ -203,4 +203,5 @@ module control_unit (
     end
 
 endmodule
+
 
