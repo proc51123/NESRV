@@ -1,8 +1,9 @@
 # RV32M instruction set
 
 ## Instruction set nomenclature
-## RV32I
-## M-extension
+### RV32I
+![RV32I](instruction_nomenclature_RV32I.png)
+### M-extension
 ![RV32M](instruction_nomenclature_RV32M.png)
 
 ## R-type instructions
