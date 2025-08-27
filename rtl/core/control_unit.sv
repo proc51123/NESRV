@@ -43,7 +43,7 @@ module control_unit (
                     // MUL/DIV/REM group (use funct3 to select)
                     case (funct3_i)
                         `FUNCT3_MUL:  begin alu_op_o = `ALU_MUL;  is_muldiv_o = 2'b01; end
-                        `FUNCT3_MULH: begin alu_op_o = `ALU_MUL;  is_muldiv_o = 2'b01; end
+                        `FUNCT3_MULH: begin alu_op_o = `ALU_MULH;  is_muldiv_o = 2'b01; end
                         `FUNCT3_MULHSU: begin alu_op_o = `ALU_MULSHU; is_muldiv_o = 2'b01; end
                         `FUNCT3_MULHU: begin alu_op_o = `ALU_MULHU; is_muldiv_o = 2'b01; end
                         `FUNCT3_DIV:  begin alu_op_o = `ALU_DIV;  is_muldiv_o = 2'b10; end
@@ -203,3 +203,4 @@ module control_unit (
     end
 
 endmodule
+
