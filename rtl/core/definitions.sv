@@ -88,6 +88,15 @@
 `define ALU_OR      `ALU_OP_WIDTH'b1000
 `define ALU_AND     `ALU_OP_WIDTH'b1001
 
+`define ALU_MUL     `ALU_OP_WIDTH'b0000
+`define ALU_MULH     `ALU_OP_WIDTH'b0001
+`define ALU_MULSHU     `ALU_OP_WIDTH'b0010
+`define ALU_MULHU     `ALU_OP_WIDTH'b0011
+`define ALU_DIV    `ALU_OP_WIDTH'b0100
+`define ALU_DIVU     `ALU_OP_WIDTH'b0101
+`define ALU_REM     `ALU_OP_WIDTH'b0110
+`define ALU_REMU     `ALU_OP_WIDTH'b0111
+
 
 // Initial PC address at reset
 `define RESET_PC        32'h00000000
