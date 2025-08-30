@@ -13,7 +13,8 @@ module control_unit (
     output logic [1:0] alu_src_a_o,     
     output logic [1:0] alu_src_b_o,     
     output logic [`ALU_OP_WIDTH-1:0] alu_op_o, 
-    output logic [1:0] is_muldiv_o    
+    output logic [1:0] is_muldiv_o,
+    output logic [2:0] immsrcD_o    
 );
 
     // Default/safe values
@@ -27,6 +28,7 @@ module control_unit (
         alu_src_b_o   = 2'b00;
         alu_op_o      = `ALU_ADD; // safe default (address calc often uses ADD)
         is_muldiv_o   = 2'b00;
+        immsrcD_o = 3'b000;
 
         unique case (opcode_i)
 
@@ -95,6 +97,9 @@ module control_unit (
                     `FUNCT3_AND:     alu_op_o = `ALU_AND;
                     default:         alu_op_o = `ALU_ADD;
                 endcase
+                if (funct3_i == 3'b100 || funct3_i == 3'b101 || funct3_i == 3'b011) immsrcD_o = 3'b100;
+                else if (funct7_i == 7'b0010011 & (funct3_i == 3'b001 || funct3_i == 3'b101)) immsrcD_o = 3'b101;
+                else immsrcD_o = 3'b000;
             end
 
             // ----------------------------------------------------
@@ -130,6 +135,7 @@ module control_unit (
                     `FUNCT3_SW: mem_write_o = 2'b11;
                     default:    mem_write_o = 2'b00;
                 endcase
+                immsrcD_o = 3'b001;
             end
 
             // ----------------------------------------------------
@@ -141,12 +147,24 @@ module control_unit (
                 alu_src_a_o  = 2'b00; // rs1
                 alu_src_b_o  = 2'b00; // rs2
                 case (funct3_i)
-                    `FUNCT3_BEQ:  alu_op_o = `ALU_SUB; // check zero
-                    `FUNCT3_BNE:  alu_op_o = `ALU_SUB; // check not zero
-                    `FUNCT3_BLT:  alu_op_o = `ALU_SLT; // signed compare
-                    `FUNCT3_BGE:  alu_op_o = `ALU_SLT; // invert result in branch logic
-                    `FUNCT3_BLTU: alu_op_o = `ALU_SLTU;
-                    `FUNCT3_BGEU: alu_op_o = `ALU_SLTU;
+                    `FUNCT3_BEQ:  begin 
+                                    alu_op_o = `ALU_SUB; immsrcD_o = 3'b010;
+                                end // check zero
+                    `FUNCT3_BNE:  begin
+                                    alu_op_o = `ALU_SUB; immsrcD_o =  3'b010;
+                                end // check not zero
+                    `FUNCT3_BLT:  begin
+                                    alu_op_o = `ALU_SLT; immsrcD_o = 3'b010;
+                                end // signed compare
+                    `FUNCT3_BGE:  begin
+                                    alu_op_o = `ALU_SLT; immsrcD_o = 3'b010;
+                                end// invert result in branch logic
+                    `FUNCT3_BLTU: begin
+                                    alu_op_o = `ALU_SLTU; immsrcD_o = 3'b110;
+                                end
+                    `FUNCT3_BGEU: begin
+                                    alu_op_o = `ALU_SLTU; immsrcD_o = 3'b110;
+                                end
                     default:      alu_op_o = `ALU_SUB;
                 endcase
             end
@@ -161,6 +179,7 @@ module control_unit (
                 alu_src_a_o  = 2'b01;   // PC
                 alu_src_b_o  = 2'b01;   // immediate (J-type)
                 alu_op_o     = `ALU_ADD;
+                immsrcD_o = 3'b011;
             end
 
             // ----------------------------------------------------
@@ -184,6 +203,7 @@ module control_unit (
                 alu_src_a_o  = 2'b00;
                 alu_src_b_o  = 2'b01;
                 alu_op_o     = `ALU_ADD;
+                immsrcD_o = 3'b111;
             end
 
             `OPCODE_AUIPC: begin
@@ -191,6 +211,7 @@ module control_unit (
                 alu_src_a_o  = 2'b01; // PC
                 alu_src_b_o  = 2'b01; // imm
                 alu_op_o     = `ALU_ADD;
+                immsrcD_o = 3'b111;
             end
 
             // ----------------------------------------------------
