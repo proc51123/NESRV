@@ -1,6 +1,7 @@
 module extend(
 input logic [31:7] instr,
-input logic [2:0] immsrcD_i),
+input logic [2:0] immsrcD_i
+output logic [31:0] immext),
 
 always_comb
     case(immsrcD_i)

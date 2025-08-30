@@ -54,7 +54,8 @@ module id_stage (
     wire [1:0]  ctrl_alu_src_b;
     wire [4:0]  ctrl_alu_op;
     wire [1:0]  ctrl_mem_to_reg;
-    wire        ctrl_jump;
+    wire [1:0] ctrl_is_muldiv;
+    wire [2:0] ctrl_immsrcD;
 
     // --- Instantiate Sub-Components ---
 
@@ -72,14 +73,17 @@ module id_stage (
         .alu_src_b_o (ctrl_alu_src_b),
         .alu_op_o    (ctrl_alu_op),
         .mem_to_reg_o(ctrl_mem_to_reg),
-        .jump_o      (ctrl_jump) // Assuming 'jump_o' is an output from your control_unit
+        .is_muldiv_o (ctrl_is_muldiv),
+        .immsrcD_o (ctrl_immsrcD),
+
     );
 
     // Immediate Generator Instance
     // Make sure the port names match your imm_gen.sv module
-    imm_gen imm_gen_inst (
-        .instr_i (id_instr_i),
-        .imm_o   (immediate_value)
+    extend extend_inst (
+        .instr (id_instr_i),
+        .immsrcD_i (ctrl_immsrcD),
+        .immext (immediate_value),
     );
 
     // Register File Instance
@@ -112,7 +116,7 @@ module id_stage (
     assign ex_alu_src_b_o   = ctrl_alu_src_b;
     assign ex_alu_op_o      = ctrl_alu_op;
     assign ex_mem_to_reg_o  = ctrl_mem_to_reg;
-    assign ex_jump_o        = ctrl_jump;
+    assign ex_is_muldiv_o = ctrl_is_muldiv;
 
     // Debugging/Hazard Unit Values Outputs
     assign ex_rs1_addr_o    = rs1_addr;
