@@ -5,7 +5,7 @@
 
 `include "definitions.sv"
 
-module alu #(
+module alu_core #(
     parameter int XLEN = 32  // Can be changed to 64 for RV64
 ) (
     input  logic [`ALU_OP_WIDTH-1:0] alu_op_i,       // Control signal from Control Unit
